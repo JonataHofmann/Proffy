@@ -1,7 +1,11 @@
 import React from 'react';
-import './styles.css'
 import PageHeader from '../../components/PageHeader';
 import TeacherItem from '../../components/TeacherItem';
+import Input from '../../components/Input';
+import Select from '../../components/Select';
+import './styles.css'
+import week_days_list from '../../params/week_days_list';
+import subjects_list from '../../params/subjects_list';
 // import { Container } from './styles';
 
 const TeacherList: React.FC = () => {
@@ -9,18 +13,9 @@ const TeacherList: React.FC = () => {
           <div id="page-teacher-list" className="container">
             <PageHeader title="Estes são os proffys disponíveis.">
               <form action="" id="search-teachers">
-                <div className="input-block">
-                  <label htmlFor="subject">Matéria</label>
-                  <input type="text" id="subject"/>
-                </div>
-                <div className="input-block">
-                  <label htmlFor="week_day">Dia da semana</label>
-                  <input type="text" id="week_day"/>
-                </div>
-                <div className="input-block">
-                  <label htmlFor="time">Hora</label>
-                  <input type="text" id="time"/>
-                </div>
+                <Select options={subjects_list} name="subject" label="Matéria" />
+                <Select options={week_days_list} name="subject" label="Dia da Semana" />
+                <Input name="time" label="Hora" type="time"/>
               </form>
             </PageHeader>
             <main>
