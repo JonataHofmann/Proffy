@@ -1,0 +1,35 @@
+### Buscar todos
+GET http://localhost:3333/users
+
+
+### Inserir
+POST http://localhost:3333/users?page=1
+content-type: application/json
+
+{
+  "codigo":0,
+  "modelo":"HONDA FIT",
+  "codigoModelo":"2",
+  "codigoAnoModelo":"IL",
+  "anoModelo":"2019",
+  "codigoVersao":"H3",
+  "versao":"Sport"
+}
+
+
+### Update
+PUT http://localhost:3333/users
+content-type: application/json
+
+{
+  "codigo":1,
+  "modelo":"HONDA CIVIC UPDATE",
+  "codigoModelo":"1",
+  "codigoAnoModelo":"IK",
+  "anoModelo":"2019",
+  "codigoVersao":"H3",
+  "versao":"Sport"
+}
+
+### Delete
+DELETE http://localhost:3333/users/1

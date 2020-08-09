@@ -1,0 +1,25 @@
+### Listar 
+GET http://localhost:3333/classes?subject=Matemática&time=11:00&week_day=1
+
+
+### Inserir
+POST http://localhost:3333/classes HTTP/1.1
+Content-Type: application/json
+
+{
+  "name":"Jonatã Hofmann",
+  "avatar": "https://avatars3.githubusercontent.com/u/23088098?s=460&u=56b9e9e98e1f2ff3c5ffd9f19051db02829449cc&v=4",
+  "whatsapp":"+5551993718598",
+  "bio":"Entusiasta da Tecnologia, apaixonado pelo que faz!",
+  "subject":"Matemática",
+  "cost":70,
+"schedule": [
+      {"week_day":1, "from":"8:00", "to":"12:00" },
+      {"week_day":2, "from":"9:00", "to":"13:00" },
+      {"week_day":3, "from":"10:00", "to":"14:00" },
+      {"week_day":4, "from":"11:00", "to":"15:00" }
+   ]
+}
+
+
+###
