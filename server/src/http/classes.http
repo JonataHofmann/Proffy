@@ -1,5 +1,5 @@
 ### Listar 
-GET http://localhost:3333/classes?subject=Matemática&time=11:00&week_day=1
+GET http://localhost:3333/classes?subject=Artes&time=11:00&week_day=1
 
 
 ### Inserir

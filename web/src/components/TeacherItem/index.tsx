@@ -1,35 +1,48 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 
 import  './styles.css';
+import api from '../../services/api';
 // import { Container } from './styles';
+export interface Teacher{
+    id:number;
+    name:string;
+    avatar:string;
+    bio:string;
+    cost:number;
+    subject:string;
+    whatsapp:string; 
+    user_id:number;
+}
 
-const TeacherItem: React.FC = () => {
+interface TeacherItemProps{
+  teacher: Teacher
+}
+const TeacherItem: React.FC<TeacherItemProps> = ({teacher}) => {
+  function createNewConnection(e: FormEvent){
+    api.post('/connections',{user_id:teacher.user_id})
+  }
   return (
     <article className="teacher-item">
         <header>
-        <img src="https://avatars0.githubusercontent.com/u/23088098?s=460&u=d8ce88682b920d593e73e9653024904442918f7b&v=4" alt="Jonatã Hofmann"/>
+        <img src={teacher.avatar} alt={teacher.name}/>
         <div>
-            <strong>Jonatã Hofmann</strong>
-            <span>Programação</span>
+            <strong>{teacher.name}</strong>
+            <span>{teacher.subject}</span>
         </div>
         </header>
         <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        <br/>
-        <br/>
-        Eos tempora sed, sunt enim veritatis unde dignissimos aliquam,
-        ipsa accusantium exercitationem officiis magni perspiciatis porro mollitia asperiores fuga at ut suscipit.
+        {teacher.bio}
         </p>
         <footer>
         <p>
             Preço/hora
-            <strong>R$ 80,00</strong>
+            <strong>R$ {teacher.cost}</strong>
         </p>
-        <button type="button">
+        <a onClick={createNewConnection} href={`http://wa.me/${teacher.whatsapp}`} target="_blank" type="button">
             <img src={whatsappIcon} alt="Entrar em contato"/>
             Entrar em contato
-        </button>
+        </a>
         </footer>
     </article>
   );

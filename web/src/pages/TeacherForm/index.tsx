@@ -1,13 +1,15 @@
 import React, {useState, FormEvent} from 'react';
+import { useHistory } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import TextArea from '../../components/Textarea';
 import warning from '../../assets/images/icons/warning.svg'
-import './styles.css'
 import Select from '../../components/Select';
 import subjects_list from '../../params/subjects_list';
 import week_days_list from '../../params/week_days_list';
-// import { Container } from './styles';
+import api from '../../services/api';
+import './styles.css'
+
 
 const TeacherForm: React.FC = () => {
   const [name,setName] = useState('');
@@ -17,7 +19,7 @@ const TeacherForm: React.FC = () => {
 
   const [subject,setSubject] = useState('');
   const [cost,setCost] = useState('');
-
+  const history = useHistory();
 
 
   const [scheduleItems, setScheduleItems] = useState([
@@ -31,24 +33,39 @@ const TeacherForm: React.FC = () => {
       ])
   }
   function setScheduleItemValue(position:number, field:string, value:string){
-    const newArray = scheduleItems.map((scheduleItem, index)=>{
+    const updateScheduleItems = scheduleItems.map((scheduleItem, index)=>{
       if(index === position){
         return {...scheduleItem ,[field]:value}
       }
+      return scheduleItem
     });
+    setScheduleItems(updateScheduleItems);
+   
+    
   }
 
   function handleCreateClass(event: FormEvent){
     event.preventDefault();
-    console.log({
+
+    const data = {
       name,
       avatar,
       bio,
       whatsapp, 
-      cost,
+      cost: Number(cost),
       subject,
-      scheduleItems
+      schedule:scheduleItems
+    }
+
+    api.post('/classes', data)
+    .then(()=>{
+      alert('Criado com sucesso');
+      history.push('/');
     })
+    .catch((err)=>{
+      alert(err);
+    });
+   
   }
   return (
     <div id="page-teacher-form" className="container">
@@ -102,8 +119,9 @@ const TeacherForm: React.FC = () => {
             label="Até" 
             type="time"
             value={scheduleItem.to}
-            // onChange={(e)=>setScheduleItemValue(index, 'to', e.target.value)}
+            onChange={(e)=>setScheduleItemValue(index, 'to', e.target.value)}
             />
+           
           </div>
           )})}
           
